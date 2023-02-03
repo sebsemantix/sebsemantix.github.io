@@ -7,7 +7,7 @@ const height = canvas.height / gridSize;
 let snake = [{ x: 5, y: 5 }];
 let food = { x: 10, y: 10 };
 let keyPressed = ""
-let lastMove = "";
+let lastMove = "right";
 
 
 addEventListener("keydown", (event) => {
@@ -96,24 +96,32 @@ function moveSnakeUp(x, y) {
     if (lastMove != "down") {
         snake.unshift({ x: x, y: y - 1 });
         lastMove = "up";
+    } else {
+        snake.unshift({ x: x, y: y + 1 });
     }
 }
 function moveSnakeDown(x, y) {
     if (lastMove != "up") {
         snake.unshift({ x: x, y: y + 1 });
         lastMove = "down";
+    } else {
+        snake.unshift({ x: x, y: y - 1 });
     }
 }
 function moveSnakeLeft(x, y) {
     if (lastMove != "right") {
         snake.unshift({ x: x - 1, y: y });
         lastMove = "left";
+    } else {
+        snake.unshift({ x: x + 1, y: y });
     }
 }
 function moveSnakeRight(x, y) {
     if (lastMove != "left") {
         snake.unshift({ x: x + 1, y: y });
         lastMove = "right";
+    } else {
+        snake.unshift({ x: x - 1, y: y });
     }
 }
 
