@@ -6,21 +6,21 @@ const height = canvas.height / gridSize;
 // Initialize the snake
 let snake = [{ x: 5, y: 5 }];
 let food = { x: 10, y: 10 };
+let keyPressed = ""
 
 
 addEventListener("keydown", (event) => {
-    console.log('keydown!!', event.keyCode)
   if (event.isComposing || event.keyCode === 40) {
-    console.log('down')
+    keyPressed = 'down'
   }
   if (event.isComposing || event.keyCode === 37) {
-    console.log('left')
+    keyPressed = 'left'
   }
   if (event.isComposing || event.keyCode === 38) {
-    console.log('up')
+    keyPressed = 'up'
   }
   if (event.isComposing || event.keyCode === 39) {
-    console.log('right')
+    keyPressed = 'right'
   }
   // do something
 });
@@ -60,7 +60,23 @@ function moveSnake() {
 
     // Move the snake
     snake.pop();
-    snake.unshift({ x: x + 1, y: y });
+    switch (keyPressed) {
+        case 'up':
+            moveSnakeUp(x, y)
+            break;
+        case 'down':
+            moveSnakeDown(x, y)
+            break;
+        case 'left':
+            moveSnakeLeft(x, y)
+            break;
+        case 'right':
+            moveSnakeRight(x, y)
+            break;
+        default:
+            snake.unshift({ x: x + 1, y: y });
+            break;
+    }
 
     // Check if the snake has eaten the food
     if (x + 1 === food.x && y === food.y) {
@@ -73,6 +89,21 @@ function moveSnake() {
     clearCanvas();
     drawFood();
     drawSnake();
+}
+
+function moveSnakeUp(x, y) {
+    snake.unshift({ x: x, y: y - 1 });
+
+}
+function moveSnakeDown(x, y) {
+    snake.unshift({ x: x, y: y + 1 });
+
+}
+function moveSnakeLeft(x, y) {
+    snake.unshift({ x: x - 1, y: y });
+}
+function moveSnakeRight(x, y) {
+    snake.unshift({ x: x + 1, y: y });
 }
 
 setInterval(moveSnake, 500);
