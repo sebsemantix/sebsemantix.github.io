@@ -7,6 +7,23 @@ const height = canvas.height / gridSize;
 let snake = [{ x: 5, y: 5 }];
 let food = { x: 10, y: 10 };
 
+
+addEventListener("keydown", (event) => {
+    console.log('keydown!!', event.keyCode)
+  if (event.isComposing || event.keyCode === 40) {
+    console.log('down')
+  }
+  if (event.isComposing || event.keyCode === 37) {
+    console.log('left')
+  }
+  if (event.isComposing || event.keyCode === 38) {
+    console.log('up')
+  }
+  if (event.isComposing || event.keyCode === 39) {
+    console.log('right')
+  }
+  // do something
+});
 // Draw the snake on the canvas
 function drawSnake() {
     snake.forEach(segment => {
