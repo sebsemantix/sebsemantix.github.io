@@ -7,6 +7,7 @@ const height = canvas.height / gridSize;
 let snake = [{ x: 5, y: 5 }];
 let food = { x: 10, y: 10 };
 let keyPressed = ""
+let lastMove = "";
 
 
 addEventListener("keydown", (event) => {
@@ -79,7 +80,7 @@ function moveSnake() {
     }
 
     // Check if the snake has eaten the food
-    if (x + 1 === food.x && y === food.y) {
+    if (x === food.x && y === food.y) {
         snake.push({});
         food = {
             x: Math.floor(Math.random() * width),
@@ -92,18 +93,28 @@ function moveSnake() {
 }
 
 function moveSnakeUp(x, y) {
-    snake.unshift({ x: x, y: y - 1 });
-
+    if (lastMove != "down") {
+        snake.unshift({ x: x, y: y - 1 });
+        lastMove = "up";
+    }
 }
 function moveSnakeDown(x, y) {
-    snake.unshift({ x: x, y: y + 1 });
-
+    if (lastMove != "up") {
+        snake.unshift({ x: x, y: y + 1 });
+        lastMove = "down";
+    }
 }
 function moveSnakeLeft(x, y) {
-    snake.unshift({ x: x - 1, y: y });
+    if (lastMove != "right") {
+        snake.unshift({ x: x - 1, y: y });
+        lastMove = "left";
+    }
 }
 function moveSnakeRight(x, y) {
-    snake.unshift({ x: x + 1, y: y });
+    if (lastMove != "left") {
+        snake.unshift({ x: x + 1, y: y });
+        lastMove = "right";
+    }
 }
 
 setInterval(moveSnake, 500);
