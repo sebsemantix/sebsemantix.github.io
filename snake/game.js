@@ -48,7 +48,6 @@ function moveSnake() {
     let y = snake[0].y;
     // Check if the snake has hit the edge of the canvas
     if (x < 0 || x >= width || y < 0 || y >= height) {
-        alert("Game over!");
         return;
     }
     // Check if the snake has hit itself
@@ -125,4 +124,13 @@ function moveSnakeRight(x, y) {
     }
 }
 
-setInterval(moveSnake, 500);
+function startGame() {
+    setInterval(moveSnake, 100);
+}
+function resetGame() {
+    snake = [{ x: 5, y: 5 }];
+    food = { x: 10, y: 10 };
+    keyPressed = ""
+    clearInterval(moveSnake)
+    setInterval(moveSnake, 100);
+}
