@@ -8,8 +8,10 @@ let snake = [{ x: 5, y: 5 }];
 let food = { x: 10, y: 10 };
 let keyPressed = ""
 let lastMove = "right";
+let score = 0;
 
 let gameManager = null;
+document.getElementById("score").innerHTML = "Score: " + score;
 
 
 addEventListener("keydown", (event) => {
@@ -46,7 +48,7 @@ function clearCanvas() {
 }
 // Move the snake
 function moveSnake() {
-    let x = snake[0].x;
+let x = snake[0].x;
     let y = snake[0].y;
     // Check if the snake has hit the edge of the canvas
     if (x < 0 || x >= width || y < 0 || y >= height) {
@@ -55,7 +57,6 @@ function moveSnake() {
     // Check if the snake has hit itself
     for (let i = 1; i < snake.length; i++) {
         if (x === snake[i].x && y === snake[i].y) {
-            alert("Game over!");
             return;
         }
     }
@@ -82,6 +83,8 @@ function moveSnake() {
 
     // Check if the snake has eaten the food
     if (x === food.x && y === food.y) {
+        score++;
+        document.getElementById("score").innerHTML = "Score: " + score;
         snake.push({});
         food = {
             x: Math.floor(Math.random() * width),
@@ -133,6 +136,8 @@ function resetGame() {
     snake = [{ x: 5, y: 5 }];
     food = { x: 10, y: 10 };
     keyPressed = ""
+    score = 0;
+    document.getElementById("score").innerHTML = "Score: " + 0;
     clearInterval(gameManager)
     gameManager = setInterval(moveSnake, 100);
 }

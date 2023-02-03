@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <style>
+
+      .logo-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-items: center;
+        align-items: center;
+        align-items: center;
+        height: 300px;
+        width: 300px;
+        margin: 0 auto;
+      }
+      .options {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        margin: 20px auto;
+
+      }
+      .option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        font-size: 40px;
+        font-family: "Lucida Console", "Courier New", monospace;
+      }
+      .option img {
+        height: 50px;
+        width: 50px;
+      }
+      .result {
+        height: 100px;
+        /* border: 1px black solid;*/
+        border-radius: 10px; 
+        display: flex;
+        justify-content: center;
+        /* margin-top: 20px; */
+        margin-top: 100px;
+        margin-left: 500px;
+        margin-right: 500px;
+        font-size: 40px;
+        padding-top: 30px;
+        color: white;
+      }
+
+      .wrong {
+        background-color: red;
+      }
+
+      .right {
+        background-color: green;;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center; font-family: monospace; font-size: 40px;">Click the correct car brand</h2>
+    <div class="logo-box">
+      <img id="logo-image" src="" alt="Logo">
+    </div>
+    <div class="options">
+      <div class="option" onclick="checkAnswer(0)">
+        <!-- <img id="option-0" src="" alt="Option 0"> -->
+        <div id="option-0-text"></div>
+      </div>
+      <div class="option" onclick="checkAnswer(1)">
+        <!-- <img id="option-1" src="" alt="Option 1"> -->
+        <div id="option-1-text"></div>
+      </div>
+      <div class="option" onclick="checkAnswer(2)">
+        <!-- <img id="option-2" src="" alt="Option 2"> -->
+        <div id="option-2-text"></div>
+      </div>
+    </div>
+    <div class="result" id="result"></div>
+    <script>
+      const logos = [
+        {
+          src: "volvo.png",
+          name: "Logo 1",
+          options: [
+              "Volvo",
+              "Saab",
+              "Ford",
+          ],
+          answer: 0,
+        },
+        {
+          src: "tesla.png",
+          name: "Logo 2",
+          options: [
+            "Kia",
+            "Mercedes",
+            "Tesla",
+          ],
+          answer: 2,
+        },
+        {
+          src: "vw.png",
+          name: "Logo 2",
+          options: [
+            "Volkswagen",
+            "Hyundai",
+            "Toyota",
+          ],
+          answer: 0,
+        },
+        {
+          src: "byd.png",
+          name: "Logo 2",
+          options: [
+            "Mazda",
+            "Byd",
+            "Polestar",
+          ],
+          answer: 1,
+        }
+        // Add more logos here
+      ];
+
+      let currentLogo = 0;
+
+      function updateScreen() {
+        document.getElementById("logo-image").src = logos[currentLogo].src;
+        //document.getElementById("option-0").src = logos[currentLogo].options[0] + ".png";
+        document.getElementById("option-0-text").innerText = logos[currentLogo].options[0];
+        //document.getElementById("option-1").src = logos[currentLogo].options[1] + ".png";
+        document.getElementById("option-1-text").innerText = logos[currentLogo].options[1];
+        //document.getElementById("option-2").src = logos[currentLogo].options[2] + ".png";
+        document.getElementById("option-2-text").innerText = logos[currentLogo].options[2];
+      }
+
+      function checkAnswer(index) {
+        if (index === logos[currentLogo].answer) {
+          var t = document.getElementById("result");
+          t.innerText = "Correct!"
+          t.classList.remove("wrong");
+          t.classList.add("right");
+        }
+        else {
+          var t = document.getElementById("result");
+          t.innerText = "Wrong!"
+          t.classList.remove("right");
+          t.classList.add("wrong");
+        }
+        currentLogo++;
+        updateScreen();
+      }
+      updateScreen();
+    </script>
+  </body>
+</html>
