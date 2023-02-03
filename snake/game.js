@@ -9,6 +9,8 @@ let food = { x: 10, y: 10 };
 let keyPressed = ""
 let lastMove = "right";
 
+let gameManager = null;
+
 
 addEventListener("keydown", (event) => {
   if (event.isComposing || event.keyCode === 40) {
@@ -125,12 +127,12 @@ function moveSnakeRight(x, y) {
 }
 
 function startGame() {
-    setInterval(moveSnake, 100);
+    gameManager = setInterval(moveSnake, 100);
 }
 function resetGame() {
     snake = [{ x: 5, y: 5 }];
     food = { x: 10, y: 10 };
     keyPressed = ""
-    clearInterval(moveSnake)
-    setInterval(moveSnake, 100);
+    clearInterval(gameManager)
+    gameManager = setInterval(moveSnake, 100);
 }
