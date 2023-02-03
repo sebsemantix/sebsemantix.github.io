@@ -125,4 +125,4 @@ function moveSnakeRight(x, y) {
     }
 }
 
-setInterval(moveSnake, 50);
+setInterval(moveSnake, 500);
