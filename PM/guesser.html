@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <style>
+            #image-container {
+                width: 500px;
+                height: 500px;
+                background-color: black;
+            }
+            #image {
+                width: 500px;
+                height: 500px;
+                background-image: url("./ulf.png");
+                background-size: cover;
+                opacity: 0;
+                transition: opacity 1s linear;
+            }
+            #start-button {
+                margin-top: 20px;
+                padding: 10px 20px;
+                background-color: green;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="font-family: roboto; font-size: 40px; font-weight: bold;">Guess the PM!</h1>
+        <div id="image-container">
+            <div id="image"></div>
+        </div>
+        <button id="start-button" onclick="start();">Start</button>
+            <a href="../index.html">Home</a>
+        <script>
+            let startindex = 1
+            function start() {
+                let image = document.getElementById("image");
+                if (startindex === 1) {
+                    image.style.opacity = 0;
+                    image.style.backgroundImage = "url('ulf.png')";;
+                }                                        
+                else if (startindex === 2) {
+                    image.style.opacity = 0;
+                    image.style.backgroundImage = "url('sanna.png')";;
+                }
+                else if (startindex === 3) {
+                    image.style.opacity = 0;
+                    image.style.backgroundImage = "url('sunak.png')";;
+                }
+                let intervalId = null;
+                intervalId = setInterval(function() {
+                    if (image.style.opacity >= 1) {
+                        clearInterval(intervalId);
+                        image.style.opacity = 0;
+                        startindex++;
+                    } else {
+                        if (image.style.opacity === "")
+                        {
+                            image.style.opacity = 0.001;
+                        }
+                        else
+                        {
+                            image.style.opacity = parseFloat(image.style.opacity) + 0.001;
+                        }
+                    }
+                }, 40);
+            }
+        </script>
+    </body>
+</html>
